@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
-# Counts a story of each line of passwd file
+# Tell the story of passwd
 
-IFS=":"
+file="/etc/passwd"
 
-while read -r USERNAME PASSWORD U_ID GID UIDINFO HOME_DIR COMMAND_SHELL;
+while IFS=: read -r USER PASS ID_USER GROUP INFO HOME_D SHLL
 do
-	echo "The user ${USERNAME} is part of the ${GID} gang, lives in ${HOME_DIR} and rides ${COMMAND_SHELL}. ${U_ID}'s place is protected by the passcode ${PASSWORD}, more info about the user here: ${UIDINFO}"
-done < "/etc/passwd"
+    printf "The user %s is part of the %s gang, lives in %s " "$USER" "$GROUP" "$HOME_D"
+    printf "and rides %s. %s's place is protected by the passcode %s, " "$SHLL" "$ID_USER" "$PASS"
+    printf "more info about the user here: %s" "$INFO"
+    printf "\n"
+done < "$file"
