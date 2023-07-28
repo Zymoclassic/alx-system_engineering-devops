@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
-# Classic fizz buzz, Displays numbers from 1 to 100.
+# Bash script that displays numbers from 1 to 100.
 
-for ((i = 1; i <= 100; i++))
+counter=1
+
+while [ $counter -le 100 ];
 do
-	if (("${i}" % 5 == 0 && "${i}" % 3 == 0))
-	then
+	if [ $((counter % 3)) -eq 0 ] && [ $((counter % 5)) -eq 0 ]; then
 		echo "FizzBuzz"
-	elif (("${i}" % 5 == 0))
-	then
-		echo "Buzz"
-	elif (("${i}" % 3 == 0))
-	then
+
+	elif [ $((counter % 3)) -eq 0 ]; then
 		echo "Fizz"
+
+	elif [ $((counter % 5)) -eq 0 ]; then
+		echo "Buzz"
+
 	else
-		echo "${i}"
+		echo "$counter"
+
 	fi
+	((counter++))
 done
